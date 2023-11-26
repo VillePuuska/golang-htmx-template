@@ -20,8 +20,14 @@ func handleRoot(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintln(w, string(file))
 }
 
+func faviconHandler(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("Favicon requested. Sending.")
+	http.ServeFile(w, r, "imgs/icon.png")
+}
+
 func main() {
 	fmt.Println("Listening on port", port)
+	http.HandleFunc("/favicon.ico", faviconHandler)
 	http.HandleFunc("/", handleRoot)
 	log.Fatal(http.ListenAndServe(":"+port, nil))
 }
