@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"os"
 )
 
 const port string = "8080"
@@ -12,7 +13,11 @@ func handleRoot(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("Request path:")
 	fmt.Println(r.URL.Path)
 	fmt.Println()
-	fmt.Fprintln(w, "Hello there!")
+	file, err := os.ReadFile("pages/missing.html")
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Fprintln(w, string(file))
 }
 
 func main() {
