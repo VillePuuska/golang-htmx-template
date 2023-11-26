@@ -12,6 +12,7 @@ func handleRoot(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("Request path:")
 	fmt.Println(r.URL.Path)
 	fmt.Println()
+	fmt.Fprintln(w, "Hello there!")
 }
 
 func main() {
